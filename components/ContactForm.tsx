@@ -35,7 +35,7 @@ export function ContactForm() {
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[340px_1fr]">
-          <div className="border border-brand-line bg-brand-soft p-6">
+          <div className="border-y border-brand-line py-6">
             <p className="text-sm font-semibold text-brand-navy">TechBridge Studio</p>
             <p className="mt-3 text-sm leading-7 text-brand-muted">
               技術系中小企業向け 採用LP制作サービス
@@ -47,7 +47,7 @@ export function ContactForm() {
             </p>
           </div>
 
-          <form className="border border-brand-line bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)]" onSubmit={handleSubmit}>
+          <form className="border-y border-brand-line py-6" onSubmit={handleSubmit}>
             <div className="grid gap-x-8 sm:grid-cols-2">
               {fields.map((field) => (
                 <div key={field.id} className="border-b border-brand-line py-4">
@@ -85,7 +85,7 @@ export function ContactForm() {
             </button>
 
             {message ? (
-              <p className="mt-5 border border-brand-line bg-brand-soft px-4 py-3 text-sm leading-6 text-brand-ink" role="status">
+              <p className="mt-5 border-y border-brand-line py-3 text-sm leading-6 text-brand-ink" role="status">
                 {message}
               </p>
             ) : null}

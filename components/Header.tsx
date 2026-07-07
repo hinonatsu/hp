@@ -38,7 +38,7 @@ export function Header() {
         <div className="hidden lg:block">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center border border-brand-blue bg-brand-blue px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(47,125,246,0.24)] transition hover:-translate-y-0.5 hover:bg-brand-navy"
+            className="inline-flex items-center justify-center border border-brand-blue bg-brand-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-navy"
           >
             無料診断を相談する
           </a>
