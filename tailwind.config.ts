@@ -10,18 +10,12 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          navy: "#071527",
-          deep: "#0D1E33",
-          blue: "#1E7BFF",
-          cyan: "#20C7E8",
-          ice: "#F4F8FB",
-          line: "#D9E3EC",
-          ink: "#111827"
+          ink: "#111111",
+          muted: "#5F5F5F",
+          line: "#D8D8D8",
+          soft: "#F7F7F5",
+          paper: "#FFFFFF"
         }
-      },
-      boxShadow: {
-        card: "0 18px 48px rgba(7, 21, 39, 0.08)",
-        lift: "0 22px 60px rgba(7, 21, 39, 0.14)"
       }
     }
   },

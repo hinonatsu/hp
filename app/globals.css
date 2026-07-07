@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: light;
-  --navy: #071527;
-  --blue: #1e7bff;
+  --ink: #111111;
+  --line: #d8d8d8;
 }
 
 * {
@@ -19,7 +19,7 @@ html {
 body {
   margin: 0;
   background: #ffffff;
-  color: #111827;
+  color: #111111;
   font-family:
     system-ui,
     -apple-system,
@@ -41,28 +41,8 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid rgba(30, 123, 255, 0.45);
+  outline: 2px solid rgba(17, 17, 17, 0.5);
   outline-offset: 3px;
-}
-
-.grid-surface {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-    radial-gradient(circle at 18% 22%, rgba(32, 199, 232, 0.22), transparent 30%),
-    linear-gradient(135deg, #071527 0%, #0d1e33 48%, #102b4b 100%);
-  background-size:
-    36px 36px,
-    36px 36px,
-    auto,
-    auto;
-}
-
-.light-grid {
-  background-image:
-    linear-gradient(rgba(7, 21, 39, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7, 21, 39, 0.045) 1px, transparent 1px);
-  background-size: 34px 34px;
 }
 
 .section-anchor {
