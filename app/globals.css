@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --navy: #071527;
+  --blue: #1e7bff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #111827;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(30, 123, 255, 0.45);
+  outline-offset: 3px;
+}
+
+.grid-surface {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    radial-gradient(circle at 18% 22%, rgba(32, 199, 232, 0.22), transparent 30%),
+    linear-gradient(135deg, #071527 0%, #0d1e33 48%, #102b4b 100%);
+  background-size:
+    36px 36px,
+    36px 36px,
+    auto,
+    auto;
+}
+
+.light-grid {
+  background-image:
+    linear-gradient(rgba(7, 21, 39, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 21, 39, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.section-anchor {
+  scroll-margin-top: 92px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
