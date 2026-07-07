@@ -10,7 +10,7 @@ import {
   ProblemSection,
   ProcessSection,
   ServiceSection,
-  SolutionSection,
+  StrengthSection,
   TrustSection
 } from "@/components/landing-sections";
 
@@ -21,7 +21,7 @@ export default function Home() {
       <main>
         <Hero />
         <ProblemSection />
-        <SolutionSection />
+        <StrengthSection />
         <ServiceSection />
         <DeliverablesSection />
         <PageStructureSection />

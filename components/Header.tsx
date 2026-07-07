@@ -7,23 +7,28 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-brand-line bg-white/95 text-brand-ink backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-brand-line bg-white/90 text-brand-ink backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-8">
         <a
           href="#top"
-          className="text-base font-semibold"
+          className="shrink-0"
           aria-label="TechBridge Studio トップへ"
           onClick={() => setOpen(false)}
         >
-          {siteConfig.name}
+          <span className="block text-base font-semibold tracking-normal text-brand-navy">
+            {siteConfig.name}
+          </span>
+          <span className="mt-0.5 block text-[11px] font-semibold text-brand-muted">
+            {siteConfig.subLabel}
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="メインナビゲーション">
+        <nav className="hidden items-center gap-4 xl:gap-6 lg:flex" aria-label="メインナビゲーション">
           {siteConfig.navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-brand-muted transition hover:text-brand-ink"
+              className="text-[13px] font-semibold text-brand-muted transition hover:text-brand-blue"
             >
               {item.label}
             </a>
@@ -33,7 +38,7 @@ export function Header() {
         <div className="hidden lg:block">
           <a
             href="#contact"
-            className="inline-flex items-center border border-brand-ink bg-brand-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-brand-ink"
+            className="inline-flex items-center justify-center border border-brand-blue bg-brand-blue px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(47,125,246,0.24)] transition hover:-translate-y-0.5 hover:bg-brand-navy"
           >
             無料診断を相談する
           </a>
@@ -41,7 +46,7 @@ export function Header() {
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center border border-brand-line lg:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center border border-brand-line bg-white lg:hidden"
           aria-label="メニューを開閉する"
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -74,7 +79,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="border-b border-brand-line py-4 text-sm text-brand-muted transition hover:text-brand-ink"
+                className="border-b border-brand-line py-4 text-sm font-semibold text-brand-muted transition hover:text-brand-blue"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -82,7 +87,7 @@ export function Header() {
             ))}
             <a
               href="#contact"
-              className="mt-4 border border-brand-ink bg-brand-ink px-4 py-3 text-center text-sm font-semibold text-white"
+              className="mt-4 border border-brand-blue bg-brand-blue px-4 py-3 text-center text-sm font-semibold text-white"
               onClick={() => setOpen(false)}
             >
               無料診断を相談する

@@ -29,26 +29,29 @@ export function ContactForm() {
               まずは無料診断からご相談ください。
             </h2>
             <p className="mt-5 max-w-3xl text-base leading-8 text-brand-muted">
-              現在のHP・採用ページ・求人票を拝見し、若手目線での改善ポイントを簡単にお送りします。
+              現在のHP・採用ページ・求人票を拝見し、理系若手目線での改善ポイントを簡単にお送りします。
             </p>
           </div>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[340px_1fr]">
-          <div className="border-y border-brand-line py-6">
-            <p className="text-sm font-semibold text-brand-ink">TechBridge Studio</p>
+          <div className="border border-brand-line bg-brand-soft p-6">
+            <p className="text-sm font-semibold text-brand-navy">TechBridge Studio</p>
             <p className="mt-3 text-sm leading-7 text-brand-muted">
               技術系中小企業向け 採用LP制作サービス
               <br />
               メールアドレス：{siteConfig.email}
             </p>
+            <p className="mt-6 border-t border-brand-line pt-5 text-xs leading-6 text-brand-muted">
+              {siteConfig.universityNote}
+            </p>
           </div>
 
-          <form className="border-y border-brand-line py-6" onSubmit={handleSubmit}>
+          <form className="border border-brand-line bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)]" onSubmit={handleSubmit}>
             <div className="grid gap-x-8 sm:grid-cols-2">
               {fields.map((field) => (
                 <div key={field.id} className="border-b border-brand-line py-4">
-                  <label htmlFor={field.id} className="text-sm font-semibold text-brand-ink">
+                  <label htmlFor={field.id} className="text-sm font-semibold text-brand-navy">
                     {field.label}
                   </label>
                   <input
@@ -56,27 +59,27 @@ export function ContactForm() {
                     name={field.id}
                     type={field.type}
                     autoComplete={field.autoComplete}
-                    className="mt-3 min-h-12 w-full border border-brand-line bg-white px-4 py-3 text-sm text-brand-ink outline-none transition focus:border-brand-ink"
+                    className="mt-3 min-h-12 w-full border border-brand-line bg-white px-4 py-3 text-sm text-brand-ink outline-none transition focus:border-brand-blue"
                   />
                 </div>
               ))}
             </div>
 
             <div className="border-b border-brand-line py-4">
-              <label htmlFor="details" className="text-sm font-semibold text-brand-ink">
+              <label htmlFor="details" className="text-sm font-semibold text-brand-navy">
                 相談内容
               </label>
               <textarea
                 id="details"
                 name="details"
                 rows={5}
-                className="mt-3 w-full border border-brand-line bg-white px-4 py-3 text-sm text-brand-ink outline-none transition focus:border-brand-ink"
+                className="mt-3 w-full border border-brand-line bg-white px-4 py-3 text-sm text-brand-ink outline-none transition focus:border-brand-blue"
               />
             </div>
 
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center border border-brand-ink bg-brand-ink px-6 py-4 text-sm font-semibold text-white transition hover:bg-white hover:text-brand-ink sm:w-auto"
+              className="mt-6 inline-flex w-full items-center justify-center border border-brand-blue bg-brand-blue px-6 py-4 text-sm font-semibold text-white transition hover:bg-brand-navy sm:w-auto"
             >
               無料診断を依頼する
             </button>
@@ -92,9 +95,11 @@ export function ContactForm() {
         <footer className="mt-16 border-t border-brand-line pt-8">
           <div className="flex flex-col gap-5 text-sm text-brand-muted md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="font-semibold text-brand-ink">{siteConfig.name}</p>
+              <p className="font-semibold text-brand-navy">{siteConfig.name}</p>
               <p className="mt-2">技術系中小企業向け 採用LP制作サービス</p>
+              <p className="mt-2">メールアドレス：{siteConfig.email}</p>
               <p className="mt-2">Copyright © {new Date().getFullYear()} TechBridge Studio</p>
+              <p className="mt-3 max-w-2xl text-xs leading-6">{siteConfig.universityNote}</p>
             </div>
             <div className="flex gap-4">
               {siteConfig.footerLinks.map((link) => (

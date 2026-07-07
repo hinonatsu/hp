@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: light;
-  --ink: #111111;
-  --line: #d8d8d8;
+  --ink: #102033;
+  --line: #d9e2ee;
 }
 
 * {
@@ -18,8 +18,8 @@ html {
 
 body {
   margin: 0;
-  background: #ffffff;
-  color: #111111;
+  background: #f8fafc;
+  color: #102033;
   font-family:
     system-ui,
     -apple-system,
@@ -41,12 +41,17 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid rgba(17, 17, 17, 0.5);
+  outline: 2px solid rgba(47, 125, 246, 0.65);
   outline-offset: 3px;
 }
 
 .section-anchor {
-  scroll-margin-top: 92px;
+  scroll-margin-top: 96px;
+}
+
+::selection {
+  background: rgba(47, 125, 246, 0.2);
+  color: #07111f;
 }
 
 @media (prefers-reduced-motion: reduce) {

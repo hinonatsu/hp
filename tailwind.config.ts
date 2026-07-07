@@ -10,11 +10,14 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          ink: "#111111",
-          muted: "#5F5F5F",
-          line: "#D8D8D8",
-          soft: "#F7F7F5",
-          paper: "#FFFFFF"
+          navy: "#07111F",
+          ink: "#102033",
+          muted: "#64748B",
+          line: "#D9E2EE",
+          soft: "#F8FAFC",
+          paper: "#FFFFFF",
+          blue: "#2F7DF6",
+          cyan: "#5DE4FF"
         }
       }
     }
