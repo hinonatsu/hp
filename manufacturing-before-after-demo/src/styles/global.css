@@ -350,6 +350,16 @@ li.menu-item a:active {
   padding: 0 0 30px;
 }
 
+.page-panel {
+  clear: both;
+  margin: 0 0 30px;
+  scroll-margin-top: 12px;
+}
+
+.col4 + .page-panel {
+  margin-top: 28px;
+}
+
 .containerInner a span {
   display: block;
   border: 1px solid #fff;
@@ -567,53 +577,4 @@ p#pCopyright {
 :focus-visible {
   outline: 2px solid #6c89b5;
   outline-offset: 2px;
-}
-
-@media (max-width: 940px) {
-  body {
-    min-width: 0;
-  }
-
-  #headerAreaOuter,
-  #headerArea,
-  #headerAreaImage,
-  #globalNaviArea,
-  #coverAreaOuter,
-  #coverArea,
-  #main_image,
-  .n2-section-smartslider,
-  #n2-ss-2,
-  .n2-ss-slider-wrapper-inside,
-  .n2-ss-slider-1,
-  .n2-ss-slider-2,
-  .n2-ss-slider-3,
-  .n2-ss-slider-4 svg,
-  #contentsAreaOuter,
-  #footerAreaOuter {
-    width: min(910px, 100vw - 20px);
-  }
-
-  #main_image,
-  .n2-section-smartslider,
-  #n2-ss-2,
-  .n2-ss-slider-wrapper-inside,
-  .n2-ss-slider-1,
-  .n2-ss-slider-2,
-  .n2-ss-slider-3,
-  .n2-ss-slider-4 svg {
-    height: calc((100vw - 20px) * 350 / 910);
-    min-height: 220px;
-  }
-
-  #contentsArea,
-  #mainArea,
-  #pPageTop {
-    width: min(870px, 100vw - 40px);
-  }
-
-  #HdBanner {
-    right: 0;
-    left: auto;
-    width: min(468px, 50vw);
-  }
 }
