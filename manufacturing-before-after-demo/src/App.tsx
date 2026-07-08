@@ -10,6 +10,10 @@ export type Mode = 'compare' | 'before' | 'after';
 const modeValues = new Set<Mode>(['compare', 'before', 'after']);
 
 const readModeFromHash = (): Mode => {
+  if (typeof window === 'undefined') {
+    return 'compare';
+  }
+
   const hash = window.location.hash.replace('#', '');
   return modeValues.has(hash as Mode) ? (hash as Mode) : 'compare';
 };
