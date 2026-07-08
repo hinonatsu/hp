@@ -1,17 +1,39 @@
 import type { ReactNode } from 'react';
 
-const navItems = [
-  'ホーム',
-  '事業概要',
-  '設備案内1',
-  '設備案内2',
-  '採用情報',
-  'お問い合わせ',
+export type Mode = 'compare' | 'before' | 'after';
+export type PageKey =
+  | 'home'
+  | 'business'
+  | 'equipment1'
+  | 'equipment2'
+  | 'recruit'
+  | 'contact';
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
+const navItems: { key: PageKey; label: string; href: string }[] = [
+  { key: 'home', label: 'ホーム', href: '/' },
+  { key: 'business', label: '事業概要', href: '/business/' },
+  { key: 'equipment1', label: '設備案内1', href: '/equipment-1/' },
+  { key: 'equipment2', label: '設備案内2', href: '/equipment-2/' },
+  { key: 'recruit', label: '採用情報', href: '/recruit/' },
+  { key: 'contact', label: 'お問い合わせ', href: '/contact/' },
 ];
 
-const heroImage = 'images/fictional-workshop-hero.png';
+const pageTitles: Record<PageKey, string> = {
+  home: '次代を支える精密なものづくり',
+  business: '事業概要',
+  equipment1: '設備案内1',
+  equipment2: '設備案内2',
+  recruit: '採用情報',
+  contact: 'お問い合わせ',
+};
 
-export type Mode = 'compare' | 'before' | 'after';
+const heroImage = `${basePath}/images/fictional-workshop-hero.png`;
+
+function withBasePath(path: string) {
+  return `${basePath}${path}`;
+}
 
 function ContactSidebar() {
   return (
@@ -47,7 +69,7 @@ function ContactSidebar() {
               <strong>フォームでのお問い合わせ</strong>
             </p>
             <p>
-              <a href="#section-5">こちら</a>
+              <a href={withBasePath('/contact/')}>こちら</a>
             </p>
           </div>
         </div>
@@ -80,16 +102,14 @@ function ContactSidebar() {
 }
 
 function PagePanel({
-  id,
   title,
   children,
 }: {
-  id?: string;
   title: string;
   children: ReactNode;
 }) {
   return (
-    <section className="col2-8 page-panel" id={id}>
+    <section className="col2-8 page-panel">
       <div className="box1">
         <div className="containerInner">
           <div className="hsNarrow">
@@ -108,7 +128,193 @@ function PagePanel({
   );
 }
 
-function App() {
+function HomeContent() {
+  return (
+    <>
+      <p>
+        産業設備の安定稼働には、現場ごとの細かな条件に合わせた部品づくりが欠かせません。
+        <br />
+        青澄ファブリカ株式会社は、架空の製造パートナーとして、
+        <br />
+        小ロット試作から保全部品の加工まで、用途に応じた相談を受け付けています。
+      </p>
+      <p>&nbsp;</p>
+      <p>■熟練の手仕事とデジタル計測の組み合わせ</p>
+      <p>
+        経験に基づく段取りと、三次元測定や加工データの管理を組み合わせ、
+      </p>
+      <p>安定した品質で一点ずつ形にする体制を整えています。</p>
+      <p>&nbsp;</p>
+      <p>■ものづくりは、現場を理解することから</p>
+      <p>
+        図面だけでは読み取りきれない使用環境や整備手順を確認し、
+      </p>
+      <p>加工しやすさ、扱いやすさ、長く使えることを大切にしています。</p>
+      <p>&nbsp;</p>
+      <p>■品質確認と環境配慮を日常の工程へ</p>
+      <p>
+        寸法、外観、材料記録を工程内で確認し、無駄な再加工を減らすことで、
+      </p>
+      <p>安心して相談できる工房型の製造体制を目指しています。</p>
+    </>
+  );
+}
+
+function BusinessContent() {
+  return (
+    <>
+      <p>
+        青澄ファブリカ株式会社は、保全用部品、治具、小型機械部品の試作加工を想定した架空企業です。
+        <br />
+        図面作成前の相談から、材料選定、加工、簡易検査までを一連の流れで受け付けています。
+      </p>
+      <p>&nbsp;</p>
+      <p>■対応できるご相談</p>
+      <p>・既存部品の代替製作、改良案の検討</p>
+      <p>・小ロットの金属加工、樹脂加工、組立用治具の製作</p>
+      <p>・現場で使う工具、保持具、保管具の寸法調整</p>
+      <p>&nbsp;</p>
+      <p>■大切にしていること</p>
+      <p>
+        速さだけを優先せず、使用環境、交換頻度、保管方法まで確認しながら、
+        長く扱いやすい形を提案します。
+      </p>
+    </>
+  );
+}
+
+function EquipmentOneContent() {
+  return (
+    <>
+      <p>
+        切削、穴あけ、面取りなど、基本的な加工を安定して行うための設備を想定しています。
+      </p>
+      <p>&nbsp;</p>
+      <p>■主な設備</p>
+      <p>・小型マシニングセンタ</p>
+      <p>・汎用旋盤、卓上フライス</p>
+      <p>・ボール盤、タップ加工機</p>
+      <p>・バリ取り、研磨、仕上げ用工具</p>
+      <p>&nbsp;</p>
+      <p>■加工対象の例</p>
+      <p>
+        アルミ、ステンレス、一般鋼材、樹脂材などを想定し、試作品や補修部品の形状確認を行います。
+      </p>
+    </>
+  );
+}
+
+function EquipmentTwoContent() {
+  return (
+    <>
+      <p>
+        測定、記録、組立確認を行うための設備も同じ工程内に配置している想定です。
+      </p>
+      <p>&nbsp;</p>
+      <p>■検査・確認設備</p>
+      <p>・三次元測定機、デジタルノギス、ハイトゲージ</p>
+      <p>・外観確認用ライト、拡大鏡</p>
+      <p>・簡易耐久確認用の治具台</p>
+      <p>・加工記録、材料記録の管理端末</p>
+      <p>&nbsp;</p>
+      <p>■記録の扱い</p>
+      <p>
+        作業の再現性を高めるため、寸法値、仕上げ条件、注意点を案件ごとに整理する想定です。
+      </p>
+    </>
+  );
+}
+
+function RecruitContent() {
+  return (
+    <>
+      <p>
+        青澄ファブリカ株式会社では、架空の採用情報として、ものづくりに関わる職種を掲載しています。
+      </p>
+      <p>&nbsp;</p>
+      <p>■募集職種</p>
+      <p>・加工スタッフ</p>
+      <p>・検査、品質記録スタッフ</p>
+      <p>・営業、工程管理サポート</p>
+      <p>&nbsp;</p>
+      <p>■求める姿勢</p>
+      <p>
+        図面や数値を丁寧に扱い、分からない点をそのままにせず確認できる方を歓迎します。
+        未経験でも道具の名前、測定の基本、材料の扱いから少しずつ覚える想定です。
+      </p>
+    </>
+  );
+}
+
+function ContactContent() {
+  return (
+    <>
+      <p>
+        試作、補修、設備部品の相談は、内容が固まる前の段階でも受け付けている想定です。
+      </p>
+      <p>&nbsp;</p>
+      <p>■お問い合わせ時に分かるとよいこと</p>
+      <p>・部品の用途、使う場所、必要な数量</p>
+      <p>・図面、写真、手書きメモの有無</p>
+      <p>・希望納期、材質、仕上げの条件</p>
+      <p>&nbsp;</p>
+      <p>■連絡先</p>
+      <p>電話：03-0000-2486</p>
+      <p>FAX：03-0000-2487</p>
+      <p>メール：info@example.invalid</p>
+    </>
+  );
+}
+
+function renderPageContent(page: PageKey) {
+  switch (page) {
+    case 'business':
+      return <BusinessContent />;
+    case 'equipment1':
+      return <EquipmentOneContent />;
+    case 'equipment2':
+      return <EquipmentTwoContent />;
+    case 'recruit':
+      return <RecruitContent />;
+    case 'contact':
+      return <ContactContent />;
+    case 'home':
+    default:
+      return <HomeContent />;
+  }
+}
+
+function CertificateColumn() {
+  return (
+    <div className="col4" id="container-61">
+      <div className="box1">
+        <div className="containerInner">&nbsp;</div>
+      </div>
+      <div className="box2">
+        <div className="containerInner">&nbsp;</div>
+      </div>
+      <div className="box3">
+        <div className="containerInner">&nbsp;</div>
+      </div>
+      <div className="box4">
+        <div className="containerInner">
+          <div className="hsNormal">
+            <div className="bImg">
+              <span className="cert-badge">
+                <strong>QC</strong>
+                <small>PROCESS</small>
+                <small>2026</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br className="clr" />
+    </div>
+  );
+}
+
+function App({ page = 'home' }: { page?: PageKey }) {
   return (
     <div id="wrapper">
       <div id="container">
@@ -117,7 +323,7 @@ function App() {
             <div id="headerArea">
               <div id="headerAreaImage">
                 <h1 id="HdLogo">
-                  <a id="hlogo_anc" href="#wrapper" title="青澄ファブリカ株式会社">
+                  <a id="hlogo_anc" href={withBasePath('/')} title="青澄ファブリカ株式会社">
                     青澄ファブリカ株式会社
                   </a>
                 </h1>
@@ -138,14 +344,12 @@ function App() {
           <div id="globalNaviAreaOuter">
             <nav id="globalNaviArea" className="color01" aria-label="主要メニュー">
               <ul className="clearfix">
-                {navItems.map((item, index) => (
+                {navItems.map((item) => (
                   <li
-                    key={item}
-                    className={`menu-item${index === 0 ? ' current_page_item' : ''}`}
+                    key={item.key}
+                    className={`menu-item${page === item.key ? ' current_page_item' : ''}`}
                   >
-                    <a href={index === 0 ? '#wrapper' : `#section-${index}`}>
-                      {item}
-                    </a>
+                    <a href={withBasePath(item.href)}>{item.label}</a>
                   </li>
                 ))}
               </ul>
@@ -224,145 +428,10 @@ function App() {
                 <main id="mainArea">
                   <div id="user-area">
                     <div className="entry-content">
-                      <PagePanel title="次代を支える精密なものづくり">
-                        <p>
-                          産業設備の安定稼働には、現場ごとの細かな条件に合わせた部品づくりが欠かせません。
-                          <br />
-                          青澄ファブリカ株式会社は、架空の製造パートナーとして、
-                          <br />
-                          小ロット試作から保全部品の加工まで、用途に応じた相談を受け付けています。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■熟練の手仕事とデジタル計測の組み合わせ</p>
-                        <p>
-                          経験に基づく段取りと、三次元測定や加工データの管理を組み合わせ、
-                        </p>
-                        <p>安定した品質で一点ずつ形にする体制を整えています。</p>
-                        <p>&nbsp;</p>
-                        <p>■ものづくりは、現場を理解することから</p>
-                        <p>
-                          図面だけでは読み取りきれない使用環境や整備手順を確認し、
-                        </p>
-                        <p>加工しやすさ、扱いやすさ、長く使えることを大切にしています。</p>
-                        <p>&nbsp;</p>
-                        <p>■品質確認と環境配慮を日常の工程へ</p>
-                        <p>
-                          寸法、外観、材料記録を工程内で確認し、無駄な再加工を減らすことで、
-                        </p>
-                        <p>安心して相談できる工房型の製造体制を目指しています。</p>
+                      <PagePanel title={pageTitles[page]}>
+                        {renderPageContent(page)}
                       </PagePanel>
-
-                      <div className="col4" id="container-61">
-                        <div className="box1">
-                          <div className="containerInner">&nbsp;</div>
-                        </div>
-                        <div className="box2">
-                          <div className="containerInner">&nbsp;</div>
-                        </div>
-                        <div className="box3">
-                          <div className="containerInner">&nbsp;</div>
-                        </div>
-                        <div className="box4">
-                          <div className="containerInner">
-                            <div className="hsNormal">
-                              <div className="bImg">
-                                <span className="cert-badge">
-                                  <strong>QC</strong>
-                                  <small>PROCESS</small>
-                                  <small>2026</small>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <br className="clr" />
-                      </div>
-
-                      <PagePanel id="section-1" title="事業概要">
-                        <p>
-                          青澄ファブリカ株式会社は、保全用部品、治具、小型機械部品の試作加工を想定した架空企業です。
-                          <br />
-                          図面作成前の相談から、材料選定、加工、簡易検査までを一連の流れで受け付けています。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■対応できるご相談</p>
-                        <p>・既存部品の代替製作、改良案の検討</p>
-                        <p>・小ロットの金属加工、樹脂加工、組立用治具の製作</p>
-                        <p>・現場で使う工具、保持具、保管具の寸法調整</p>
-                        <p>&nbsp;</p>
-                        <p>■大切にしていること</p>
-                        <p>
-                          速さだけを優先せず、使用環境、交換頻度、保管方法まで確認しながら、
-                          長く扱いやすい形を提案します。
-                        </p>
-                      </PagePanel>
-
-                      <PagePanel id="section-2" title="設備案内1">
-                        <p>
-                          切削、穴あけ、面取りなど、基本的な加工を安定して行うための設備を想定しています。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■主な設備</p>
-                        <p>・小型マシニングセンタ</p>
-                        <p>・汎用旋盤、卓上フライス</p>
-                        <p>・ボール盤、タップ加工機</p>
-                        <p>・バリ取り、研磨、仕上げ用工具</p>
-                        <p>&nbsp;</p>
-                        <p>■加工対象の例</p>
-                        <p>
-                          アルミ、ステンレス、一般鋼材、樹脂材などを想定し、試作品や補修部品の形状確認を行います。
-                        </p>
-                      </PagePanel>
-
-                      <PagePanel id="section-3" title="設備案内2">
-                        <p>
-                          測定、記録、組立確認を行うための設備も同じ工程内に配置している想定です。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■検査・確認設備</p>
-                        <p>・三次元測定機、デジタルノギス、ハイトゲージ</p>
-                        <p>・外観確認用ライト、拡大鏡</p>
-                        <p>・簡易耐久確認用の治具台</p>
-                        <p>・加工記録、材料記録の管理端末</p>
-                        <p>&nbsp;</p>
-                        <p>■記録の扱い</p>
-                        <p>
-                          作業の再現性を高めるため、寸法値、仕上げ条件、注意点を案件ごとに整理する想定です。
-                        </p>
-                      </PagePanel>
-
-                      <PagePanel id="section-4" title="採用情報">
-                        <p>
-                          青澄ファブリカ株式会社では、架空の採用情報として、ものづくりに関わる職種を掲載しています。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■募集職種</p>
-                        <p>・加工スタッフ</p>
-                        <p>・検査、品質記録スタッフ</p>
-                        <p>・営業、工程管理サポート</p>
-                        <p>&nbsp;</p>
-                        <p>■求める姿勢</p>
-                        <p>
-                          図面や数値を丁寧に扱い、分からない点をそのままにせず確認できる方を歓迎します。
-                          未経験でも道具の名前、測定の基本、材料の扱いから少しずつ覚える想定です。
-                        </p>
-                      </PagePanel>
-
-                      <PagePanel id="section-5" title="お問い合わせ">
-                        <p>
-                          試作、補修、設備部品の相談は、内容が固まる前の段階でも受け付けている想定です。
-                        </p>
-                        <p>&nbsp;</p>
-                        <p>■お問い合わせ時に分かるとよいこと</p>
-                        <p>・部品の用途、使う場所、必要な数量</p>
-                        <p>・図面、写真、手書きメモの有無</p>
-                        <p>・希望納期、材質、仕上げの条件</p>
-                        <p>&nbsp;</p>
-                        <p>■連絡先</p>
-                        <p>電話：03-0000-2486</p>
-                        <p>FAX：03-0000-2487</p>
-                        <p>メール：info@example.invalid</p>
-                      </PagePanel>
+                      {page === 'home' && <CertificateColumn />}
                     </div>
                   </div>
                 </main>
