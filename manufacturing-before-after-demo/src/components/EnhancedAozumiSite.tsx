@@ -1,165 +1,139 @@
 import type { ReactNode } from 'react';
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-const heroImage = `${basePath}/images/fictional-workshop-hero.png`;
-
 const company = {
-  name: '青澄ファブリカ株式会社',
-  tagline: '未来にのこる精密加工',
-  description:
-    '小ロット試作から保全部品の加工まで、現場の条件に合わせて相談できる架空の製造パートナーです。',
-  address: '〒100-0000 東京都架空区青澄町1番地 サンプル工業ビル6F',
-  tel: '03-0000-2486',
-  fax: '03-0000-2487',
-  email: 'info@example.invalid',
-  note:
-    'このデモサイトに記載する会社名、住所、連絡先、事業内容はすべて架空です。',
+  name: '有限会社 小泉精機製作所',
+  shortName: '小泉精機製作所',
+  tagline: 'アルミを知り尽くした技術力',
+  tel: '0266-58-8532',
+  fax: '0266-52-2780',
+  hours: '8:30〜17:00 平日',
+  closed: '土日祝日休',
+  address: '〒392-0131 長野県諏訪市大字湖南963-1',
+  representative: '代表取締役 小泉 雅彦',
+  founded: '昭和59年5月',
+  capital: '500万円',
+  employees: '23名',
 };
 
-const consultationItems = [
-  '既存部品の代替製作、改良案の検討',
-  '小ロットの金属加工、樹脂加工、組立用治具の製作',
-  '現場で使う工具、保持具、保管具の寸法調整',
-  '図面作成前の相談、材料選定、加工、簡易検査',
-] as const;
-
-const messages = [
-  {
-    title: '熟練の手仕事とデジタル計測の組み合わせ',
-    body:
-      '経験に基づく段取りと、三次元測定や加工データの管理を組み合わせ、安定した品質で一点ずつ形にする体制を整えています。',
-  },
-  {
-    title: 'ものづくりは、現場を理解することから',
-    body:
-      '図面だけでは読み取りきれない使用環境や整備手順を確認し、加工しやすさ、扱いやすさ、長く使えることを大切にしています。',
-  },
-  {
-    title: '品質確認と環境配慮を日常の工程へ',
-    body:
-      '寸法、外観、材料記録を工程内で確認し、無駄な再加工を減らすことで、安心して相談できる工房型の製造体制を目指しています。',
-  },
-] as const;
-
-type EquipmentRow = {
-  name: string;
-  purpose: string;
-  value: string;
+const images = {
+  hero:
+    'https://www.e-koizumi.co.jp/wp/wp-content/themes/koizumi-child/images/top/slider/koizumi_mainvisua2.jpg',
+  diecast:
+    'https://www.e-koizumi.co.jp/wp/wp-content/themes/koizumi-child/images/die-cast/dei-cast_pageimg.jpg',
+  equipment:
+    'https://www.e-koizumi.co.jp/wp/wp-content/themes/koizumi-child/images/equipment/equipment_naibu1.jpg',
+  quality:
+    'https://www.e-koizumi.co.jp/wp/wp-content/themes/koizumi-child/images/quality/quality_room.jpg',
+  product:
+    'https://www.e-koizumi.co.jp/wp/wp-content/uploads/2023/06/semiconductor-filter-02.jpg',
 };
 
-const machiningEquipment: EquipmentRow[] = [
-  {
-    name: '小型マシニングセンタ',
-    purpose: '切削・穴あけ・面取り',
-    value: '試作品や補修部品の形状確認に対応',
-  },
-  {
-    name: '汎用旋盤・卓上フライス',
-    purpose: '一点物の加工・調整',
-    value: '現場の使い勝手に合わせた寸法調整',
-  },
-  {
-    name: 'ボール盤・タップ加工機',
-    purpose: '穴あけ・ねじ加工',
-    value: '治具や保持具の細かな仕様調整',
-  },
-  {
-    name: 'バリ取り・研磨・仕上げ工具',
-    purpose: '外観と扱いやすさの調整',
-    value: '長く安全に使える部品づくり',
-  },
-];
+const quickFacts = [
+  ['対応領域', 'アルミダイカスト2次加工 / アルミ切削加工'],
+  ['加工姿勢', '難加工・高精度・複雑形状にも対応'],
+  ['相談入口', '図面送付で見積り回答最短1営業日'],
+] as const;
 
-const inspectionEquipment: EquipmentRow[] = [
+const technologyRows = [
   {
-    name: '三次元測定機・デジタルノギス・ハイトゲージ',
-    purpose: '寸法確認',
-    value: '加工後の再現性と品質確認',
+    title: 'アルミダイカスト2次加工',
+    body:
+      '平面度や同軸度など精度を必要とする加工、複雑形状加工、量産前の試作製作、VA提案まで対応します。',
+    image: images.diecast,
   },
   {
-    name: '外観確認用ライト・拡大鏡',
-    purpose: '表面確認',
-    value: '傷や欠け、仕上げ状態の確認',
-  },
-  {
-    name: '簡易耐久確認用の治具台',
-    purpose: '組立・使用時の確認',
-    value: '現場で扱う前の使い勝手確認',
-  },
-  {
-    name: '加工記録・材料記録の管理端末',
-    purpose: '記録管理',
-    value: '寸法値、仕上げ条件、注意点の整理',
-  },
-];
-
-const materialExamples = ['アルミ', 'ステンレス', '一般鋼材', '樹脂材', '試作品', '補修部品'] as const;
-
-const processSteps = [
-  {
-    title: '用途・使用環境の確認',
-    body: '図面だけで判断せず、どこで使う部品か、交換頻度や整備手順まで確認します。',
-  },
-  {
-    title: '材料・加工方法の検討',
-    body: 'アルミ、ステンレス、一般鋼材、樹脂材などから、用途と扱いやすさに合わせて方向性を整理します。',
-  },
-  {
-    title: '試作・寸法調整',
-    body: '小ロットや一点物の加工を前提に、加工しやすさと使いやすさの両方を確認します。',
-  },
-  {
-    title: '測定・記録',
-    body: '寸法、外観、材料記録、仕上げ条件を案件ごとに整理し、次回の再現性を高めます。',
-  },
-  {
-    title: '納品・次回相談への引き継ぎ',
-    body: '納品して終わりではなく、使用後の改善点や再加工の必要性まで次の相談につなげます。',
+    title: 'アルミ切削加工・旋盤加工',
+    body:
+      '複雑形状、高難度、微細穴、平面度、はめあい公差など、精密さが求められるアルミ部品を1個から相談できます。',
+    image: images.equipment,
   },
 ] as const;
 
-const recruitRoles = [
-  {
-    title: '加工スタッフ',
-    body: '切削、穴あけ、面取りなど、基本的な加工を安定して行う仕事です。',
-  },
-  {
-    title: '検査・品質記録スタッフ',
-    body: '寸法・外観・材料記録を丁寧に確認し、安定した品質を支える仕事です。',
-  },
-  {
-    title: '営業・工程管理サポート',
-    body: 'お客様の相談内容を整理し、現場と連携して工程を進める仕事です。',
-  },
+const strengths = [
+  ['技術力', 'アルミ切削加工30年の実績をもとに、品質・精度・コスト・納期・複雑形状加工の課題解決を支援します。'],
+  ['提案力', 'アルミダイカスト2次加工で、精度改善やコストダウンにつながるVA提案を行います。'],
+  ['一貫対応', '図面を用意すれば、材料手配から加工、表面処理までまとめて依頼できます。'],
+  ['品質管理', '常温管理された検査室と検査教育を受けた検査員により、品質クレーム0件を目指します。'],
+  ['対応力', '特急対応・短納期・見積り依頼にも、柔軟で迅速な対応を行います。'],
 ] as const;
 
-const inquiryHints = [
-  '部品の用途、使う場所、必要な数量',
-  '図面、写真、手書きメモの有無',
-  '希望納期、材質、仕上げの条件',
+const machiningDetails = [
+  '穴あけ加工',
+  'タップ・ねじ切り加工',
+  'フライス加工',
+  '鏡面フライス加工',
+  '輪郭・ポケット加工',
+  '微細穴加工',
+  '複合旋盤加工',
+  '切削刻印加工',
 ] as const;
 
-const comparisonPoints = [
-  {
-    label: '最初に伝わること',
-    before: '会社名と事業内容は分かるが、相談できる内容を本文から探す必要がある。',
-    after: '小ロット試作、保全部品、治具製作など、相談できる内容が冒頭で分かる。',
-  },
-  {
-    label: '設備情報の見え方',
-    before: '設備名が並んでおり、何に役立つ設備か判断しにくい。',
-    after: '設備名、用途、相談できることを表で整理し、発注前の判断材料にしている。',
-  },
-  {
-    label: '問い合わせ前の安心感',
-    before: '連絡先はあるが、何を伝えればよいか分かりにくい。',
-    after: '用途、数量、図面、材質など、相談時に必要な情報が先に分かる。',
-  },
-  {
-    label: '採用への伝わり方',
-    before: '募集職種は分かるが、仕事内容のイメージが持ちにくい。',
-    after: '職種ごとの役割と未経験者向けの安心材料を整理している。',
-  },
+const capabilityRows = [
+  ['対応素材', 'A5052、6061、6063、2017、7075などアルミ全般'],
+  ['加工サイズ', '〜600mm × 1,000mm'],
+  ['ロット', '1個〜1000個'],
+  ['加工精度', '穴深さ・穴ピッチ・穴径・外径内径公差など ±1/100mm目安'],
+  ['表面処理', 'アルマイト、硬質アルマイト、レイデント、タフラム、カシマコート、メッキ、アロジンなど'],
+] as const;
+
+const proposalItems = [
+  '冷凍チャックによる歪みの防止',
+  'アルミの薄肉加工',
+  'アルミ製治具を設計から製造まで対応',
+  '加工難度が高い材質の製品を高精度で対応',
+] as const;
+
+const productExamples = [
+  'アルミ製つまみカバー部品',
+  '半導体製造装置用アルミフィルター',
+  'アルミ削り出しによる航空機器部品コネクタケース',
+  '車両部品用アルミ製ヒートシンク',
+  'アルミフレーム',
+  '0.1mmの微細穴を施したアルミ加工サンプル',
+  '魚群探知機装置カバー',
+  '産業機器外装部品',
+] as const;
+
+const qualityItems = [
+  ['ISO9001に準拠した品質管理', '品質マネジメントシステムに基づき、製造プロセスを明確に設定管理します。'],
+  ['20℃±1℃の常温検査室', '高精度な製品を正確に検査するため、常温管理された検査室で製品検査を行います。'],
+  ['作業の標準化・5S活動', '品質安定化のため作業標準化と工場内環境整備に取り組みます。'],
+  ['不良発生時の対応', '原因追求と対策を行い、作業標準書へ対策内容を反映します。'],
+] as const;
+
+const inspectionEquipment = [
+  ['ハンディプローブ三次元測定機', 'キーエンス XM-C1000', '1'],
+  ['画像寸法測定器', 'キーエンス IM-7500', '1'],
+  ['三次元測定器', 'ミツトヨ BH-706', '1'],
+  ['三次元測定器', 'ミツトヨ Crysta-ApexC776', '1'],
+] as const;
+
+const productionEquipment = [
+  ['CNC自動旋盤', 'スター精密 SD-26 TypeG / SR-38 typeB'],
+  ['マシニングセンター', 'ブラザー R450X2 / FANUC ROBODRILL / 豊和工業 きわみ ほか'],
+  ['NC旋盤', 'テクノワシノ LG-6・LG-7・LG-60・LJ52B'],
+  ['CNC複合旋盤', 'アマダマシンツール A18S / テクノワシノ A-12'],
+  ['CAD/CAM', 'Autodesk FeatureCAM / MYPAC SUPER CAM'],
+] as const;
+
+const flowSteps = [
+  'お問い合わせ',
+  'ヒアリング相談',
+  'お見積回答',
+  '試作加工',
+  '検査',
+  '量産加工',
+  '納品',
+] as const;
+
+const companyRows = [
+  ['会社名', company.name],
+  ['代表者', company.representative],
+  ['所在地', company.address],
+  ['事業内容', 'アルミダイカスト切削加工、アルミ切削加工・穴あけ加工、光学機器外観部品製造、自動車部品製造'],
+  ['設立', company.founded],
+  ['資本金', company.capital],
+  ['従業員数', company.employees],
 ] as const;
 
 function scrollToSection(id: string) {
@@ -187,23 +161,30 @@ function SectionLead({
   );
 }
 
-function EquipmentTable({ rows }: { rows: EquipmentRow[] }) {
+function DataTable({
+  headers,
+  rows,
+}: {
+  headers: readonly string[];
+  rows: readonly (readonly string[])[];
+}) {
   return (
     <div className="enhanced-table-wrap">
       <table className="enhanced-table">
         <thead>
           <tr>
-            <th>設備</th>
-            <th>用途</th>
-            <th>相談できること</th>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.name}>
-              <th scope="row">{row.name}</th>
-              <td>{row.purpose}</td>
-              <td>{row.value}</td>
+            <tr key={row.join('-')}>
+              <th scope="row">{row[0]}</th>
+              {row.slice(1).map((cell) => (
+                <td key={cell}>{cell}</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -214,151 +195,188 @@ function EquipmentTable({ rows }: { rows: EquipmentRow[] }) {
 
 function EnhancedAozumiSite({ onBeforeClick }: { onBeforeClick?: () => void }) {
   return (
-    <main className="enhanced-site">
+    <main className="enhanced-site koizumi-site">
       <header className="enhanced-header">
         <a href="#top" className="enhanced-brand" aria-label={`${company.name} トップへ`}>
-          <span>{company.name}</span>
+          <span>{company.shortName}</span>
           <small>{company.tagline}</small>
         </a>
         <button type="button" className="enhanced-mobile-return" aria-label="改善前のサイトを見る" onClick={onBeforeClick}>
           改善前へ
         </button>
         <nav className="enhanced-nav" aria-label="改善後サイト内メニュー">
-          <button type="button" onClick={() => scrollToSection('consultation')}>相談内容</button>
-          <button type="button" onClick={() => scrollToSection('equipment')}>設備</button>
-          <button type="button" onClick={() => scrollToSection('quality')}>品質</button>
-          <button type="button" onClick={() => scrollToSection('recruit')}>採用</button>
+          <button type="button" onClick={() => scrollToSection('technology')}>加工技術</button>
+          <button type="button" onClick={() => scrollToSection('strengths')}>強み</button>
+          <button type="button" onClick={() => scrollToSection('quality')}>品質保証</button>
+          <button type="button" onClick={() => scrollToSection('equipment')}>工場設備</button>
           <button type="button" onClick={() => scrollToSection('contact')}>相談する</button>
         </nav>
       </header>
 
-      <section id="top" className="enhanced-hero" aria-label="改善後サイトのメインビジュアル">
-        <img src={heroImage} alt="" />
+      <section id="top" className="enhanced-hero koizumi-hero" aria-label="改善後サイトのメインビジュアル">
+        <img src={images.hero} alt="" />
         <div className="enhanced-hero__shade" aria-hidden="true" />
         <div className="enhanced-hero__content">
-          <p>架空製造業サイト 改善後サンプル</p>
-          <h1>{company.name}</h1>
+          <p>Aluminum's finest professional</p>
+          <h1><span>アルミを知り尽くした</span><span>技術力</span></h1>
           <div>
-            <strong>小ロット試作から保全部品の加工まで。</strong>
+            <strong>アルミダイカスト2次加工とアルミ切削加工に特化。</strong>
             <span>
-              現場の使い方、整備手順、必要数量まで確認し、長く扱いやすい部品づくりを相談できるサイトとして整理しました。
+              難加工・高精度・複雑形状など、他社があきらめた部品にも挑戦し、
+              お客様に満足いただけるものづくりを追求します。
             </span>
           </div>
           <nav className="hero-actions" aria-label="主要導線">
-            <button type="button" onClick={() => scrollToSection('consultation')}>何を相談できるか見る</button>
-            <button type="button" onClick={() => scrollToSection('contact')}>問い合わせ前に必要な情報を見る</button>
+            <button type="button" onClick={() => scrollToSection('technology')}>加工技術を見る</button>
+            <button type="button" onClick={() => scrollToSection('contact')}>図面を添えて相談する</button>
           </nav>
         </div>
       </section>
 
       <section className="enhanced-intro" aria-label="改善後サイトの要点">
         <p>
-          内容は改善前サイトと同じです。違うのは、見る人が判断しやすい順番へ並べ替え、
-          設備名・用途・相談内容をつなげて読めるようにした点です。
+          小泉精機製作所の公式サイトに掲載されている内容を、発注担当者が判断しやすい順番へ整理しました。
+          技術、実績、品質保証、設備、相談導線を一続きで確認できます。
         </p>
         <dl>
-          <div><dt>対応範囲</dt><dd>試作 / 加工 / 保全</dd></div>
-          <div><dt>加工対象</dt><dd>金属 / 樹脂 / 治具</dd></div>
-          <div><dt>相談段階</dt><dd>図面作成前から可</dd></div>
+          {quickFacts.map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
-      <section className="enhanced-section enhanced-section--split" id="consultation">
-        <SectionLead eyebrow="Consultation" title="最初に「何を相談できる会社か」を明確にします。">
-          <p>改善前サイトの本文に入っていた情報を、発注担当者が最初に確認する項目として整理しています。</p>
+      <section className="enhanced-section enhanced-section--split" id="technology">
+        <SectionLead eyebrow="Technology" title="加工技術を、依頼内容から選びやすく整理します。">
+          <p>アルミダイカスト2次加工とアルミ切削加工の違いを明確にし、相談したい加工へすぐ進める構成にしています。</p>
         </SectionLead>
-        <ul className="enhanced-line-list">
-          {consultationItems.map((item) => <li key={item}>{item}</li>)}
-        </ul>
-      </section>
-
-      <section className="enhanced-section">
-        <SectionLead eyebrow="Promise" title="青澄ファブリカが大切にしていること。" />
-        <div className="statement-list">
-          {messages.map((message, index) => (
-            <section key={message.title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{message.title}</h3>
-              <p>{message.body}</p>
+        <div className="technology-list">
+          {technologyRows.map((item) => (
+            <section key={item.title}>
+              <img src={item.image} alt="" />
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
             </section>
           ))}
         </div>
       </section>
 
-      <section className="enhanced-section enhanced-section--split" id="equipment">
-        <SectionLead eyebrow="Equipment" title="設備名だけで終わらせず、何に役立つかまで見せます。">
-          <p>切削・穴あけ・面取りなどの加工設備と、測定・記録・組立確認の設備を分け、発注前に判断しやすい形にしました。</p>
-        </SectionLead>
-        <div className="equipment-stack">
-          <section>
-            <h3>加工設備</h3>
-            <EquipmentTable rows={machiningEquipment} />
-          </section>
-          <section>
-            <h3>検査・確認設備</h3>
-            <EquipmentTable rows={inspectionEquipment} />
-          </section>
+      <section className="enhanced-section" id="strengths">
+        <SectionLead eyebrow="Strengths" title="小泉精機が選ばれる理由を、5つの判断材料に分けて提示します。" />
+        <div className="statement-list">
+          {strengths.map(([title, body], index) => (
+            <section key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </section>
+          ))}
         </div>
       </section>
 
-      <section className="enhanced-section enhanced-section--materials" id="quality">
-        <SectionLead eyebrow="Quality" title="品質確認と記録の考え方を、取引前の安心材料にします。">
-          <p>寸法、外観、材料記録を工程内で確認し、仕上げ条件と注意点を案件ごとに整理する想定です。</p>
+      <section className="enhanced-section enhanced-section--split" id="machining">
+        <SectionLead eyebrow="Machining" title="複雑形状・高難度加工の具体例を先に見せます。">
+          <p>穴あけ、タップ、フライス、微細穴、複合旋盤など、対応できる加工の幅が短時間で伝わるようにしています。</p>
         </SectionLead>
-        <div className="material-band">
-          <p>加工対象の例</p>
-          <ul>{materialExamples.map((item) => <li key={item}>{item}</li>)}</ul>
+        <ul className="enhanced-line-list">
+          {machiningDetails.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="enhanced-section enhanced-section--split">
+        <SectionLead eyebrow="Capability" title="対応条件は表でまとめ、発注前の確認負担を減らします。" />
+        <DataTable headers={['項目', '内容']} rows={capabilityRows} />
+      </section>
+
+      <section className="enhanced-section enhanced-section--split" id="products">
+        <SectionLead eyebrow="Works" title="製品事例は用途が分かる名称で整理します。">
+          <p>半導体装置部品、航空機器部品、車両部品、産業機器部品など、幅広い実績を一覧で確認できます。</p>
+        </SectionLead>
+        <div className="product-showcase">
+          <img src={images.product} alt="" />
+          <ul>
+            {productExamples.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="enhanced-section enhanced-section--split">
+        <SectionLead eyebrow="Proposal" title="加工者視点のVA提案で、図面段階の課題を先回りします。">
+          <p>精度改善、コストダウン、歪み防止、治具設計など、過去の経験から課題解決を支援します。</p>
+        </SectionLead>
+        <ul className="enhanced-line-list">
+          {proposalItems.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="enhanced-section enhanced-section--split" id="quality">
+        <SectionLead eyebrow="Quality" title="品質保証は、検査環境と不良対応まで見える化します。">
+          <p>品質クレーム0件を目指す姿勢を、品質方針、検査体制、設備、不良発生時の対応まで一連で示します。</p>
+        </SectionLead>
+        <div className="quality-composition">
+          <img src={images.quality} alt="" />
+          <dl className="role-list">
+            {qualityItems.map(([title, body]) => (
+              <div key={title}>
+                <dt>{title}</dt>
+                <dd>{body}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section className="enhanced-section enhanced-section--split" id="equipment">
+        <SectionLead eyebrow="Equipment" title="生産設備と検査設備を分け、対応力を読みやすくします。">
+          <p>マシニングセンター、NC旋盤、複合機を活用した複合加工と、検査設備による品質保証を並べて確認できます。</p>
+        </SectionLead>
+        <div className="equipment-stack">
+          <section>
+            <h3>主な機械設備</h3>
+            <DataTable headers={['設備', 'メーカー・形式']} rows={productionEquipment} />
+          </section>
+          <section>
+            <h3>検査設備</h3>
+            <DataTable headers={['設備', 'メーカー・形式', '台数']} rows={inspectionEquipment} />
+          </section>
         </div>
       </section>
 
       <section className="enhanced-section">
-        <SectionLead eyebrow="Process" title="相談から納品までの流れを、読みやすい順番で示します。" />
+        <SectionLead eyebrow="Flow" title="ご相談から納品までの流れを、迷わず追えるようにします。" />
         <ol className="process-list">
-          {processSteps.map((step, index) => (
-            <li key={step.title}>
+          {flowSteps.map((step, index) => (
+            <li key={step}>
               <span>{String(index + 1).padStart(2, '0')}</span>
               <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <h3>{step}</h3>
+                <p>{index === 0 ? 'TEL・FAX・メール・お問い合わせフォームから相談できます。' : '前工程の確認内容を引き継ぎ、次の判断へ進みます。'}</p>
               </div>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="enhanced-section enhanced-section--split" id="recruit">
-        <SectionLead eyebrow="Recruit" title="採用情報は、働く姿が想像できる言葉に直します。">
-          <p>職種名だけでなく、どんな役割かを短く添えることで、未経験者にも入口が見えます。</p>
-        </SectionLead>
-        <dl className="role-list">
-          {recruitRoles.map((role) => <div key={role.title}><dt>{role.title}</dt><dd>{role.body}</dd></div>)}
-        </dl>
-      </section>
-
-      <section className="enhanced-section">
-        <SectionLead eyebrow="Before / After" title="同じ情報でも、判断のしやすさが変わります。" />
-        <div className="comparison-lines">
-          {comparisonPoints.map((point) => (
-            <section key={point.label}>
-              <h3>{point.label}</h3>
-              <p><span>改善前</span>{point.before}</p>
-              <p><span>改善後</span>{point.after}</p>
-            </section>
-          ))}
-        </div>
-      </section>
-
       <section className="enhanced-section enhanced-section--split" id="contact">
-        <SectionLead eyebrow="Contact" title="問い合わせ前に必要な情報を先に見せ、不安を減らします。">
-          <p>試作、補修、設備部品の相談は、内容が固まる前の段階でも受け付けている想定です。</p>
+        <SectionLead eyebrow="Contact" title="加工相談は、電話・FAX・フォームの入口を明確にします。">
+          <p>お問い合わせフォームでは、jpg、jpeg、gif、png、pdf、doc、docx、xls、xlsxのファイル添付に対応しています。</p>
         </SectionLead>
         <div className="contact-panel">
-          <h3>お問い合わせ時に分かるとよいこと</h3>
-          <ul>{inquiryHints.map((item) => <li key={item}>{item}</li>)}</ul>
+          <h3>加工に関するご相談・お見積りはこちら</h3>
           <dl>
             <div><dt>電話</dt><dd>{company.tel}</dd></div>
             <div><dt>FAX</dt><dd>{company.fax}</dd></div>
-            <div><dt>メール</dt><dd>{company.email}</dd></div>
+            <div><dt>受付</dt><dd>{company.hours} / {company.closed}</dd></div>
           </dl>
         </div>
       </section>
@@ -369,16 +387,18 @@ function EnhancedAozumiSite({ onBeforeClick }: { onBeforeClick?: () => void }) {
           <h2>会社概要</h2>
         </div>
         <dl>
-          <div><dt>会社名</dt><dd>{company.name}</dd></div>
-          <div><dt>所在地</dt><dd>{company.address}</dd></div>
-          <div><dt>事業内容</dt><dd>保全用部品、治具、小型機械部品の試作加工</dd></div>
-          <div><dt>連絡先</dt><dd>{company.tel} / {company.email}</dd></div>
+          {companyRows.map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
       <footer className="enhanced-footer">
-        <p>{company.note}</p>
-        <p>Before/After demo for structured website renewal.</p>
+        <p>{company.address}</p>
+        <p>{company.tel} / {company.hours} / {company.closed}</p>
       </footer>
     </main>
   );

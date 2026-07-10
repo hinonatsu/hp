@@ -802,7 +802,7 @@ p#pCopyright {
   line-height: 1.6;
 }
 
-.enhanced-hero__content span {
+.enhanced-hero__content > div span {
   color: rgba(255, 255, 255, 0.86);
   font-size: 16px;
   line-height: 2;
@@ -1173,6 +1173,169 @@ p#pCopyright {
   line-height: 1.8;
 }
 
+.koizumi-site {
+  --enhanced-bg: #f7f8f6;
+  --enhanced-ink: #151a1e;
+  --enhanced-muted: #5e676d;
+  --enhanced-green: #172d3a;
+  --enhanced-copper: #986733;
+  --enhanced-blue: #2f7891;
+  --enhanced-line: #d9dfe2;
+  --enhanced-paper: #ffffff;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.koizumi-site .enhanced-header {
+  border-bottom-color: rgba(23, 45, 58, 0.14);
+  background: rgba(247, 248, 246, 0.94);
+}
+
+.koizumi-site .enhanced-brand,
+.koizumi-site .enhanced-nav button {
+  color: var(--enhanced-green) !important;
+}
+
+.koizumi-site .enhanced-nav button:hover {
+  color: #fff !important;
+}
+
+.koizumi-hero {
+  min-height: 610px;
+  background: #111a20;
+}
+
+.koizumi-hero > img {
+  object-position: center 48%;
+}
+
+.koizumi-hero .enhanced-hero__shade {
+  background:
+    linear-gradient(90deg, rgba(13, 22, 28, 0.97) 0%, rgba(13, 22, 28, 0.82) 46%, rgba(13, 22, 28, 0.24) 100%),
+    linear-gradient(0deg, rgba(13, 22, 28, 0.5), rgba(13, 22, 28, 0.04));
+}
+
+.koizumi-hero .enhanced-hero__content {
+  min-height: 610px;
+}
+
+.koizumi-hero h1 span {
+  display: inline;
+}
+
+.koizumi-site .enhanced-intro {
+  margin-top: -1px;
+  padding-top: 38px;
+}
+
+.technology-list {
+  display: grid;
+  gap: 34px;
+}
+
+.technology-list section {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.42fr) minmax(0, 1fr);
+  gap: 30px;
+  align-items: stretch;
+  padding: 0 0 34px;
+  border-bottom: 1px solid var(--enhanced-line);
+}
+
+.technology-list section:first-child {
+  padding-top: 0;
+}
+
+.technology-list img,
+.product-showcase img,
+.quality-composition img {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+  background: #dce2e4;
+}
+
+.technology-list img {
+  min-height: 190px;
+  aspect-ratio: 4 / 3;
+}
+
+.technology-list div {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+
+.technology-list h3,
+.product-showcase li {
+  color: var(--enhanced-green);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.technology-list p {
+  color: var(--enhanced-muted);
+  font-size: 15px;
+  line-height: 2;
+}
+
+.product-showcase {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.44fr) minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.product-showcase img {
+  aspect-ratio: 5 / 4;
+  height: auto;
+}
+
+.product-showcase ul {
+  display: grid;
+  border-top: 1px solid var(--enhanced-line);
+  list-style: none;
+}
+
+.product-showcase li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--enhanced-line);
+  font-size: 16px;
+}
+
+.product-showcase li::before {
+  width: 22px;
+  height: 1px;
+  margin-top: 15px;
+  background: var(--enhanced-copper);
+  content: "";
+}
+
+.quality-composition {
+  display: grid;
+  gap: 30px;
+}
+
+.quality-composition img {
+  aspect-ratio: 16 / 7;
+  height: auto;
+}
+
+.koizumi-site .contact-panel {
+  border-top: 1px solid var(--enhanced-green);
+  padding-top: 24px;
+}
+
+.koizumi-site .enhanced-footer {
+  background: #111a20;
+}
+
 @media (max-width: 1040px) {
   .enhanced-header {
     align-items: flex-start;
@@ -1192,6 +1355,8 @@ p#pCopyright {
   .enhanced-intro,
   .enhanced-section--split,
   .enhanced-company,
+  .product-showcase,
+  .technology-list section,
   .comparison-lines section,
   .statement-list section {
     grid-template-columns: 1fr;
@@ -1202,8 +1367,14 @@ p#pCopyright {
   }
 
   .statement-list section,
+  .technology-list section,
   .comparison-lines section {
     gap: 14px;
+  }
+
+  .koizumi-hero,
+  .koizumi-hero .enhanced-hero__content {
+    min-height: 560px;
   }
 }
 
@@ -1232,9 +1403,12 @@ p#pCopyright {
   }
 
   .enhanced-header {
-    position: relative;
+    position: sticky;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
     min-height: auto;
-    padding: 28px 18px 16px;
+    padding: 14px 18px 12px;
   }
   .experience-root--after > .experience-toggle {
     display: none;
@@ -1244,7 +1418,7 @@ p#pCopyright {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
+    margin-left: 0;
     padding: 9px 12px;
     border: 1px solid #123d35;
     border-radius: 4px;
@@ -1257,38 +1431,54 @@ p#pCopyright {
   }
 
   .enhanced-nav {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    width: 100%;
+    padding-bottom: 4px;
+    overflow-x: auto;
   }
 
   .enhanced-nav button {
+    flex: 0 0 auto;
     padding: 8px 10px;
     font-size: 12px;
   }
 
   .enhanced-hero,
   .enhanced-hero__content {
-    min-height: 520px;
+    min-height: 500px;
   }
 
   .enhanced-hero__content {
     width: min(100% - 36px, 1160px);
-    padding: 76px 0 42px;
+    padding: 54px 0 34px;
   }
 
   .enhanced-hero__shade {
     background: linear-gradient(0deg, rgba(10, 24, 21, 0.88), rgba(10, 24, 21, 0.34));
   }
 
+  .koizumi-hero .enhanced-hero__shade {
+    background:
+      linear-gradient(0deg, rgba(13, 22, 28, 0.92), rgba(13, 22, 28, 0.48)),
+      linear-gradient(90deg, rgba(13, 22, 28, 0.96), rgba(13, 22, 28, 0.54));
+  }
+
   .enhanced-hero h1 {
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1.22;
+  }
+
+  .koizumi-hero h1 span {
+    display: block;
   }
 
   .enhanced-hero__content strong {
     font-size: 18px;
   }
 
-  .enhanced-hero__content span {
+  .enhanced-hero__content > div span {
     font-size: 14px;
   }
 
@@ -1343,7 +1533,35 @@ p#pCopyright {
   }
 
   .enhanced-table {
-    min-width: 620px;
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  .enhanced-table th,
+  .enhanced-table td {
+    padding: 14px 10px 14px 0;
+    word-break: break-word;
+  }
+
+  .enhanced-table tbody th {
+    width: auto;
+  }
+
+  .technology-list,
+  .product-showcase,
+  .quality-composition {
+    gap: 22px;
+  }
+
+  .technology-list img,
+  .product-showcase img,
+  .quality-composition img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .technology-list h3,
+  .product-showcase li {
+    font-size: 16px;
   }
 
   .enhanced-footer {
