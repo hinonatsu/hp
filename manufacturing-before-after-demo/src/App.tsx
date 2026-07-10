@@ -1,4 +1,7 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useEffect, useState, type ReactNode } from 'react';
+import EnhancedAozumiSite from './components/EnhancedAozumiSite';
 
 export type Mode = 'compare' | 'before' | 'after';
 export type PageKey =
@@ -315,8 +318,44 @@ function CertificateColumn() {
 }
 
 function App({ page = 'home' }: { page?: PageKey }) {
+  const [mode, setMode] = useState<Mode>('before');
+
+  useEffect(() => {
+    if (window.location.hash === '#after') {
+      setMode('after');
+    }
+  }, []);
+
+  const showAfter = mode === 'after';
+
+  const handleModeChange = (nextMode: Mode) => {
+    setMode(nextMode);
+    const hash = nextMode === 'after' ? '#after' : '#before';
+    window.history.replaceState(null, '', `${window.location.pathname}${hash}`);
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
   return (
-    <div id="wrapper">
+    <div className={`experience-root experience-root--${showAfter ? 'after' : 'before'}`}>
+      <button
+        type="button"
+        className={`experience-toggle experience-toggle--${showAfter ? 'light' : 'dark'}`}
+        aria-label={showAfter ? '改善前のサイトを見る' : '改善後のサイトを見る'}
+        onClick={() => handleModeChange(showAfter ? 'before' : 'after')}
+      >
+        <span className="toggle-label toggle-label--desktop">
+          {showAfter ? '改善前のサイトを見る' : '改善後のサイトを見る'}
+        </span>
+        <span className="toggle-label toggle-label--mobile">
+          {showAfter ? '改善前へ' : '改善後へ'}
+        </span>
+      </button>
+      {showAfter ? (
+        <EnhancedAozumiSite onBeforeClick={() => handleModeChange('before')} />
+      ) : (
+        <div id="wrapper" className="legacy-site">
       <div id="container">
         <div id="headerAreaSection">
           <div id="headerAreaOuter">
@@ -464,6 +503,8 @@ function App({ page = 'home' }: { page?: PageKey }) {
           </div>
         </div>
       </div>
+        </div>
+      )}
     </div>
   );
 }
